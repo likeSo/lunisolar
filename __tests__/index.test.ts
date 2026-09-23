@@ -185,6 +185,14 @@ describe('lunisolar.fromLunar', () => {
   })
 })
 
+describe('lunisolar.fromSB', () => {
+  it('fromSB', () => {
+    const result = lunisolar.fromSB(['甲辰', '丁丑', '乙亥', '戊寅'])
+    expect(result).toBeInstanceOf(Array)
+    console.log('干支反查结果', result[0].toString())
+  })
+})
+
 describe('lunisolar utc', () => {
   it('lunisolar.utc', () => {
     const utcLsr = lunisolar('2023-03-13 18:23', { isUTC: true })

@@ -11,6 +11,19 @@ declare namespace lunisolar {
   export interface ConfigType extends Partial<Omit<GlobalConfig, 'locales'>> {
     extra?: any
   }
+
+  export interface FromSBConfig extends ConfigType {
+    /**
+     * 反查起始公历年份，默认 FIRST_YEAR。
+     */
+    fromYear?: number
+
+    /**
+     * 反查结束公历年份，默认 LAST_YEAR。
+     */
+    toYear?: number
+  }
+
   export interface Locale extends LsrLocale {}
   export const _globalConfig: GlobalConfig
   /**
@@ -749,6 +762,20 @@ declare namespace lunisolar {
    * @param config 创建Lunisolar实例时对应的设置
    */
   export function fromLunar(lunarData: ParseFromLunarParam, config?: configType): Lunisolar
+
+  /**
+   * 根据四柱干支反查公历时间。
+   *
+   * 因为四柱本身不包含唯一年份，所以返回所有匹配结果。
+   *
+   * @param param [年柱, 月柱, 日柱, 时柱]
+   * @param config.fromYear 起始年份
+   * @param config.toYear 结束年份
+   */
+  export function fromSB(
+    param: [SB, SB, SB, SB] | [string, string, string, string],
+    config?: FromSBConfig
+  ): Lunisolar[]
 
   /**
    * Setting global Configuration
